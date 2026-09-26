@@ -259,7 +259,7 @@
     $('#hat-off').addEventListener('click', () => wear('', ''));
   }
 
-  /* ---------- Aliens: click for scrap ---------- */
+  /* ---------- Scrap: click aliens (and the boss) ---------- */
   let scrap = 0;
   const scrapEl = $('#scrap');
   const hud = $('.scrap-hud');
@@ -267,32 +267,70 @@
     'Nice shot!', 'Splat.', 'The Swarm felt that one.', 'Keep that up and you might save the planet.',
     'Scrap acquired.', 'Headshot! (It was mostly head.)',
   ];
+  function floatText(text, x, y) {
+    const pop = document.createElement('span');
+    pop.className = 'pop-scrap';
+    pop.textContent = text;
+    pop.style.left = `${x}px`;
+    pop.style.top = `${y}px`;
+    document.body.append(pop);
+    setTimeout(() => pop.remove(), 950);
+  }
+  function addScrap(amount) {
+    const before = scrap;
+    scrap += amount;
+    if (scrapEl) scrapEl.textContent = scrap;
+    if (hud) { hud.classList.remove('bump'); void hud.offsetWidth; hud.classList.add('bump'); }
+    return Math.floor(scrap / 25) > Math.floor(before / 25);
+  }
+  const centre = el => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+
   $$('.alien').forEach(alien => {
     alien.addEventListener('click', e => {
       if (alien.classList.contains('dead')) return;
       alien.classList.remove('respawn');
       alien.classList.add('dead');
-      scrap += 5;
-      if (scrapEl) scrapEl.textContent = scrap;
-      if (hud) { hud.classList.remove('bump'); void hud.offsetWidth; hud.classList.add('bump'); }
-
-      const pop = document.createElement('span');
-      pop.className = 'pop-scrap';
-      pop.textContent = '+5';
-      const r = alien.getBoundingClientRect();
-      pop.style.left = `${e.clientX || r.left + r.width / 2}px`;
-      pop.style.top = `${e.clientY || r.top + r.height / 2}px`;
-      document.body.append(pop);
-      setTimeout(() => pop.remove(), 950);
-
-      if (scrap % 25 === 0) toast(`${scrap} scrap! ${quips[(scrap / 25 - 1) % quips.length]}`);
-
+      const [cx, cy] = centre(alien);
+      floatText('+5', e.clientX || cx, e.clientY || cy);
+      if (addScrap(5)) toast(`${scrap} scrap! ${quips[Math.floor(scrap / 25 - 1) % quips.length]}`);
       setTimeout(() => {
         alien.classList.remove('dead');
         alien.classList.add('respawn');
       }, 4200);
     });
   });
+
+  // The Oxide Baron takes a few hits to go down.
+  const boss = $('#boss-hit');
+  const hpBar = $('#boss-hp');
+  if (boss && hpBar) {
+    let hp = 100;
+    let down = false;
+    boss.addEventListener('click', e => {
+      if (down) return;
+      const dmg = 9 + Math.floor(Math.random() * 7);
+      hp = Math.max(0, hp - dmg);
+      hpBar.style.width = `${hp}%`;
+      const [cx, cy] = centre(boss);
+      floatText(`-${dmg}`, e.clientX || cx, e.clientY || cy);
+      boss.classList.remove('hit', 'back');
+      void boss.offsetWidth;
+      boss.classList.add('hit');
+      setTimeout(() => boss.classList.remove('hit'), 120);
+      if (hp > 0) return;
+      down = true;
+      boss.classList.add('down');
+      addScrap(100);
+      toast('Oxide Baron defeated! +100 scrap. (He\'ll be back.)');
+      setTimeout(() => {
+        hp = 100;
+        hpBar.style.width = '100%';
+        boss.classList.remove('down');
+        boss.classList.add('back');
+        down = false;
+      }, 3200);
+    });
+  }
 
   /* ---------- Screenshot lightbox ---------- */
   const box = $('#lightbox');
