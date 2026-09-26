@@ -52,7 +52,7 @@ body.mo ::selection { background: #ffd640; color: var(--graphite); }
 .compare { position: relative; aspect-ratio: 1015 / 668; overflow: hidden; background: var(--paper-2); touch-action: pan-y; }
 .compare img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .compare-sketch { position: absolute; inset: 0; background: var(--paper-2); clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.compare-sketch img { filter: url(#pencil); }
+.compare-sketch img { filter: url(#pencil); mix-blend-mode: multiply; }
 .compare-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 4px; margin-left: -2px; background: var(--graphite); pointer-events: none; }
 .compare-handle span {
   position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px;
@@ -101,7 +101,7 @@ body.mo ::selection { background: #ffd640; color: var(--graphite); }
 .taped.small-sketch { width: min(320px, 80%); margin: 0 auto; transform: rotate(-3deg); }
 .taped.photo { transform: rotate(-2deg); }
 .taped figcaption { text-align: center; color: var(--pen); font-size: 1.4rem; margin-top: 6px; }
-.sketch { filter: url(#pencil); }
+.sketch { filter: url(#pencil); mix-blend-mode: multiply; }
 
 .sticky {
   position: absolute; right: -4%; bottom: -10%; z-index: 4; width: 190px; margin: 0;
