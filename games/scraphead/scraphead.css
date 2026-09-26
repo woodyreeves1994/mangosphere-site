@@ -479,10 +479,10 @@ section { position: relative; padding: 110px 0; }
   15% { opacity: 1; }
   100% { transform: translate(30px, -560px); opacity: 0; }
 }
-.lair-hero { position: absolute; left: 3%; bottom: -3%; z-index: 4; width: 42%; }
-.lair-hero img { display: block; width: 100%; height: auto; filter: drop-shadow(0 20px 20px rgba(0, 0, 0, .5)); }
+.lair-hero { position: absolute; left: 19%; bottom: -9%; z-index: 4; width: 31%; }
+.lair-hero img { display: block; width: 100%; height: auto; filter: drop-shadow(0 0 22px rgba(255, 200, 120, .16)) drop-shadow(0 18px 18px rgba(0, 0, 0, .45)); }
 .gasp {
-  position: absolute; left: 47%; top: -9%;
+  position: absolute; left: 60%; top: 2%;
   font-family: var(--display); font-size: clamp(2.2rem, 4.4vw, 3.6rem); line-height: 1; color: var(--gold);
   text-shadow: var(--outline), 0 .08em 0 var(--ink);
   transform-origin: 50% 100%;
@@ -709,7 +709,7 @@ section { position: relative; padding: 110px 0; }
   .counters { grid-template-columns: repeat(2, 1fr); }
   .lair { aspect-ratio: 4 / 5; }
   .beast { width: 160%; top: 16%; }
-  .lair-hero { width: 86%; left: 2%; }
+  .lair-hero { width: 60%; left: 14%; bottom: -8%; }
   .boss-hud { width: 84%; }
   .bounty-art { min-height: 440px; }
   .poster { margin-right: 18%; width: 78%; }
