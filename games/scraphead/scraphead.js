@@ -300,35 +300,50 @@
     });
   });
 
-  // The Oxide Baron takes a few hits to go down.
-  const boss = $('#boss-hit');
-  const hpBar = $('#boss-hp');
-  if (boss && hpBar) {
-    let hp = 100;
-    let down = false;
-    boss.addEventListener('click', e => {
-      if (down) return;
-      const dmg = 9 + Math.floor(Math.random() * 7);
-      hp = Math.max(0, hp - dmg);
-      hpBar.style.width = `${hp}%`;
-      const [cx, cy] = centre(boss);
-      floatText(`-${dmg}`, e.clientX || cx, e.clientY || cy);
-      boss.classList.remove('hit', 'back');
-      void boss.offsetWidth;
-      boss.classList.add('hit');
-      setTimeout(() => boss.classList.remove('hit'), 120);
-      if (hp > 0) return;
-      down = true;
-      boss.classList.add('down');
-      addScrap(100);
-      toast('Oxide Baron defeated! +100 scrap. (He\'ll be back.)');
-      setTimeout(() => {
-        hp = 100;
-        hpBar.style.width = '100%';
-        boss.classList.remove('down');
-        boss.classList.add('back');
-        down = false;
-      }, 3200);
+  // The boss is a secret: poking the shadow only makes it angry.
+  const lair = $('#lair');
+  const beast = $('#beast');
+  if (lair && beast) {
+    const growls = [
+      'Not yet, little robot.',
+      'You are not ready for this one.',
+      'It saw you. It definitely saw you.',
+      'Nope. No spoilers.',
+      'Maybe come back with a bigger gun.',
+    ];
+    let growl = 0, calm;
+    beast.addEventListener('click', () => {
+      beast.classList.add('angry');
+      lair.classList.remove('rumble');
+      void lair.offsetWidth;
+      lair.classList.add('rumble');
+      toast(growls[growl++ % growls.length]);
+      clearTimeout(calm);
+      calm = setTimeout(() => beast.classList.remove('angry'), 1400);
+    });
+  }
+
+  // Shoot your own wanted poster.
+  const poster = $('#poster');
+  if (poster) {
+    let holes = 0;
+    poster.addEventListener('click', e => {
+      const r = poster.getBoundingClientRect();
+      const x = e.clientX ? (e.clientX - r.left) / r.width * 100 : 30 + Math.random() * 40;
+      const y = e.clientY ? (e.clientY - r.top) / r.height * 100 : 30 + Math.random() * 40;
+      const hole = document.createElement('span');
+      hole.className = 'hole';
+      hole.style.left = `${Math.min(94, Math.max(6, x))}%`;
+      hole.style.top = `${Math.min(96, Math.max(4, y))}%`;
+      poster.append(hole);
+      // Keep it from turning into Swiss cheese.
+      const all = poster.querySelectorAll('.hole');
+      if (all.length > 14) all[0].remove();
+      poster.classList.remove('shot');
+      void poster.offsetWidth;
+      poster.classList.add('shot');
+      floatText('BANG!', e.clientX || r.left + r.width / 2, e.clientY || r.top + r.height / 2);
+      if (++holes === 6) toast('Easy, cowboy. That\'s you on there.');
     });
   }
 
