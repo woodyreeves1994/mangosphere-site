@@ -229,6 +229,7 @@ h2 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
 .studio-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 56px; align-items: center; }
 .studio-copy p { font-size: 1.15rem; color: var(--ink-soft); margin: 18px 0 0; }
 .studio-copy h2 { margin-bottom: 8px; }
+.story-link { margin-top: 28px; }
 .values { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 .value {
   padding: 26px 24px 24px;

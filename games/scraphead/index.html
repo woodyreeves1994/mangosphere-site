@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SCRAPHEAD · a Mangosphere game</title>
-  <meta name="description" content="SCRAPHEAD is a roguelike looter-shooter. Build a scrap robot, blast the alien Swarm, loot 30 weapons and 47 trinkets, topple towering bosses and save the planet. Coming to Steam." />
+  <meta name="description" content="SCRAPHEAD is a roguelike looter-shooter. Build a scrap robot, blast the alien Swarm, grab all the loot, topple towering bosses and save the planet. Coming to Steam." />
   <meta name="theme-color" content="#1d2419" />
   <meta property="og:title" content="SCRAPHEAD · a Mangosphere game" />
   <meta property="og:description" content="Kill aliens. Grab loot. Save the planet from the Swarm. A roguelike looter-shooter coming to Steam." />
@@ -57,6 +57,7 @@
     <a href="#loot">Loot</a>
     <a href="#bosses">Bosses</a>
     <a href="#hats">Hats</a>
+    <a href="making-of/">Making of</a>
   </nav>
   <div class="nav-right">
     <div class="scrap-hud" title="Scrap collected. Click the aliens." aria-live="polite">
@@ -114,12 +115,12 @@
       <article class="pillar ink reveal">
         <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-battle"/></svg></div>
         <h3>Blast the Swarm</h3>
-        <p>Survive 30-second waves of skittering, spitting, exploding aliens. Your guns fire on their own. You aim, you dodge, you panic.</p>
+        <p>Wave after wave of skittering, spitting, exploding aliens. Stay moving, keep shooting, try not to panic.</p>
       </article>
       <article class="pillar ink reveal">
         <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-scrapyard"/></svg></div>
         <h3>Loot everything</h3>
-        <p>Hoover up scrap, shop at the Scrapyard, and merge matching weapons into higher ranks. Stack trinkets until the numbers get silly.</p>
+        <p>Grab every bit of scrap, hit the shop between fights, and build a loadout that gets gloriously out of hand.</p>
       </article>
       <article class="pillar ink reveal">
         <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-boss"/></svg></div>
@@ -135,14 +136,6 @@
       <figcaption>Wave 1. It only gets worse. That's the fun part.</figcaption>
     </figure>
 
-    <ul class="counters" aria-label="What's in the box">
-      <li class="reveal"><b data-count="3">3</b><span>chassis</span></li>
-      <li class="reveal"><b data-count="30">30</b><span>weapons</span></li>
-      <li class="reveal"><b data-count="47">47</b><span>trinkets</span></li>
-      <li class="reveal"><b class="secret">?</b><span>bosses</span></li>
-      <li class="reveal"><b class="secret">?</b><span>bounty hunters</span></li>
-      <li class="reveal"><b data-count="8">8</b><span>very important hats</span></li>
-    </ul>
   </div>
 </section>
 
@@ -160,7 +153,7 @@
         <li class="node" data-step="0">
           <button type="button" class="node-btn" aria-pressed="true"><svg aria-hidden="true"><use href="#i-battle"/></svg></button>
           <h3>Battle</h3>
-          <p>Survive the wave. Scoop up scrap and XP.</p>
+          <p>Fight off the Swarm and grab the scrap.</p>
         </li>
         <li class="node" data-step="1">
           <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-unknown"/></svg></button>
@@ -170,7 +163,7 @@
         <li class="node" data-step="2">
           <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-scrapyard"/></svg></button>
           <h3>Scrapyard</h3>
-          <p>Buy, sell and merge guns at the merchant.</p>
+          <p>Spend your hard-earned scrap.</p>
         </li>
         <li class="node" data-step="3">
           <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-elite"/></svg></button>
@@ -213,45 +206,24 @@
         <img class="chassis-art" src="img/robot/chassis-scrapper.webp" width="640" height="640" alt="" />
         <span class="chassis-name">Scrapper</span>
         <span class="chassis-tag">Good at everything, best at nothing</span>
-        <span class="stats">
-          <span><i>Health</i><b>100</b></span>
-          <span><i>Speed</i><b>470</b></span>
-          <span><i>Gun slots</i><b>6</b></span>
-          <span><i>Dodge</i><b>5.0s</b></span>
-        </span>
-        <span class="starter"><img src="img/weapons/weapon-pistol.webp" alt="" /><span>Starts with a <b>Bolt Pistol</b></span></span>
+        <span class="traits"><span>All-rounder</span><span>Forgiving</span></span>
       </button>
 
       <button class="chassis-card reveal" data-tone="hauler" role="radio" aria-checked="false" type="button">
         <img class="chassis-art" src="img/robot/chassis-hauler.webp" width="640" height="640" alt="" />
         <span class="chassis-name">Hauler</span>
         <span class="chassis-tag">Two extra gun slots. Speed sold separately.</span>
-        <span class="stats">
-          <span><i>Health</i><b class="up">130</b></span>
-          <span><i>Speed</i><b class="down">395</b></span>
-          <span><i>Gun slots</i><b class="up">8</b></span>
-          <span><i>Damage</i><b class="down">&minus;15%</b></span>
-          <span><i>Shields</i><b class="up">1</b></span>
-          <span><i>Dodge</i><b class="down">6.0s</b></span>
-        </span>
-        <span class="starter"><img src="img/weapons/weapon-shotgun.webp" alt="" /><span>Starts with a <b>Scrap Shotgun</b></span></span>
+        <span class="traits"><span>Tough</span><span>Extra guns</span><span>Slow</span></span>
       </button>
 
       <button class="chassis-card reveal" data-tone="scout" role="radio" aria-checked="false" type="button">
         <img class="chassis-art" src="img/robot/chassis-filament.webp" width="640" height="640" alt="" />
         <span class="chassis-name">Scout</span>
         <span class="chassis-tag">Hits like nothing else, dies like nothing else</span>
-        <span class="stats">
-          <span><i>Health</i><b class="down">45</b></span>
-          <span><i>Speed</i><b class="up">585</b></span>
-          <span><i>Gun slots</i><b class="down">3</b></span>
-          <span><i>Damage</i><b class="up">+45%</b></span>
-          <span><i>Dodge</i><b class="up">3.6s</b></span>
-        </span>
-        <span class="starter"><img src="img/weapons/weapon-knife.webp" alt="" /><span>Starts with a <b>Gutting Knife</b></span></span>
+        <span class="traits"><span>Fast</span><span>Hits hard</span><span>Fragile</span></span>
       </button>
     </div>
-    <p class="note reveal">Spend banked skill points in the Workshop between runs to upgrade every chassis.</p>
+    
   </div>
 </section>
 
@@ -262,7 +234,7 @@
     <header class="sec-head reveal">
       <p class="kicker">The Scrapyard is open</p>
       <h2 class="title">Loot. So much loot.</h2>
-      <p class="lede">From a Slugger Bat to a Gravity Lance, from Duct Tape to a Scrap Terrier. Find two of the same gun and merge them into something meaner.</p>
+      <p class="lede">From a Slugger Bat to a Gravity Lance, from Duct Tape to a Scrap Terrier. Mix and match until your robot is more gun than robot.</p>
     </header>
   </div>
 
@@ -274,14 +246,6 @@
   </div>
 
   <div class="wrap">
-    <div class="merge ink reveal" aria-label="Merging: two rank one Miniguns make a rank two Minigun">
-      <div class="merge-card"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="1"></em></div>
-      <span class="merge-op">+</span>
-      <div class="merge-card"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="1"></em></div>
-      <span class="merge-op">=</span>
-      <div class="merge-card is-hot"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="2"></em></div>
-      <p class="merge-copy"><b>Merge it.</b> Matching weapons combine into a higher rank. Bigger numbers. Louder noises.</p>
-    </div>
   </div>
 </section>
 
@@ -405,7 +369,7 @@
       <img class="hat-robot" id="hat-robot" src="img/robot/wear-cowboy.webp" width="600" height="780" alt="The Scraphead robot wearing the Dust Rider hat" />
     </div>
     <div class="locker ink reveal">
-      <h2 class="locker-title">Hat Locker <span class="nowrap">&middot; 8 / 8</span></h2>
+      <h2 class="locker-title">Hat Locker</h2>
       <p class="locker-sub">Unlock hats at the merchant. Cosmetic only. Absolutely essential.</p>
       <div class="hat-grid" id="hat-grid" role="radiogroup" aria-label="Hats">
         <button type="button" role="radio" aria-checked="false" data-hat="crown"><img src="img/hats/hat-crown.webp" alt="" /><span>Scrap King</span></button>
@@ -434,6 +398,21 @@
       <img src="img/robot/chassis-hauler.webp" alt="" class="coop-a" />
       <img src="img/robot/chassis-filament.webp" alt="" class="coop-b" />
       <span class="coop-heart">+</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAKING OF TEASER ============ -->
+<section class="story-teaser">
+  <div class="wrap story-grid">
+    <a class="story-card reveal" href="making-of/">
+      <img src="img/making-of/sketch-tableau-cowboy.webp" width="1015" height="668" loading="lazy" alt="A pencil line sketch of the Scraphead robot in its cowboy hat" />
+    </a>
+    <div class="story-copy reveal">
+      <p class="kicker">Behind the scrap</p>
+      <h2 class="title">The making of SCRAPHEAD</h2>
+      <p class="lede">From sketchbook doodles to Steam: how a UX designer and dad from the UK built the game he always wanted to make, one evening at a time.</p>
+      <a class="btn btn-gold btn-lg" href="making-of/">Read the story</a>
     </div>
   </div>
 </section>
@@ -476,6 +455,7 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <a class="foot-studio" href="../../"><img src="../../img/mango.svg" alt="" width="40" height="40" /><span>SCRAPHEAD is a <b>Mangosphere</b> game</span></a>
+    <a class="foot-link" href="making-of/">The making of SCRAPHEAD &rarr;</a>
     <p class="foot-small">&copy; <span class="js-year">2026</span> Mangosphere. All aliens were harmed in the making of this game.</p>
   </div>
 </footer>

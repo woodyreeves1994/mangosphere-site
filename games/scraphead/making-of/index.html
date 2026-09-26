@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The making of SCRAPHEAD · Mangosphere</title>
+  <meta name="description" content="How a UX designer and dad from the UK made SCRAPHEAD, the game he always wanted to make: sketches, inspirations, design, honesty about AI, and evenings of bug hunting with friends." />
+  <meta name="theme-color" content="#f4eedd" />
+  <link rel="canonical" href="https://mangosphere.uk/games/scraphead/making-of/" />
+  <meta property="og:title" content="The making of SCRAPHEAD" />
+  <meta property="og:description" content="From sketchbook to Steam: the story of a game made between the day job and being a dad." />
+  <meta property="og:image" content="https://mangosphere.uk/games/scraphead/img/making-of/sketch-tableau-cowboy.webp" />
+  <meta property="og:url" content="https://mangosphere.uk/games/scraphead/making-of/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../img/favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Caveat:wght@500;700&family=Fredoka:wght@700&family=Lilita+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../scraphead.css" />
+  <link rel="stylesheet" href="making-of.css" />
+</head>
+<body class="mo">
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" />
+      <feDisplacementMap in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <filter id="pencil" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="1" seed="3" />
+      <feDisplacementMap in="SourceGraphic" scale="2.4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <symbol id="i-steam" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2a14 14 0 0 0-13.94 12.8l7.5 3.1a4 4 0 0 1 2.24-.68h.2l3.34-4.84v-.07a5.28 5.28 0 1 1 5.28 5.28h-.12l-4.77 3.4v.18a3.96 3.96 0 0 1-7.85.76L2.5 19.9A14 14 0 1 0 16 2Zm-5.2 21.24-1.72-.71a2.97 2.97 0 1 0 1.6-4.07l1.78.74a2.19 2.19 0 1 1-1.66 4.04Zm13.35-10.8a3.52 3.52 0 1 0-3.52 3.52 3.52 3.52 0 0 0 3.52-3.52Zm-6.16 0a2.65 2.65 0 1 1 2.64 2.65 2.64 2.64 0 0 1-2.64-2.65Z"/></symbol>
+    <symbol id="i-tick" viewBox="0 0 24 24"><path d="M3.5 13.5 C6 15 7.5 17 9 19.5 C12 12 15.5 7.5 21 3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#dream">Skip to the story</a>
+
+<header class="nav scrolled" id="nav">
+  <a class="nav-back" href="../../../" aria-label="Back to Mangosphere">
+    <img src="../../../img/mango.svg" alt="" width="26" height="26" />
+    <span>Mangosphere</span>
+  </a>
+  <a class="nav-logo" href="../">SCRAPHEAD</a>
+  <nav class="nav-links" aria-label="Chapters">
+    <a href="../">The game</a>
+    <a href="#dream">The story</a>
+    <a href="#sketchbook">Sketches</a>
+    <a href="#ai">AI &amp; me</a>
+  </nav>
+  <div class="nav-right">
+    <a class="btn btn-gold btn-sm" href="../#wishlist"><svg aria-hidden="true"><use href="#i-steam"/></svg><span>Wishlist</span></a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="mo-hero">
+  <div class="wrap mo-hero-grid">
+    <div class="mo-hero-copy">
+      <p class="hand hand-kicker">a story from the sketchbook&hellip;</p>
+      <h1 class="mo-h1">The making of <span class="gold-word">SCRAPHEAD</span></h1>
+      <p class="mo-lede">How a UX designer and dad from the UK finally made the game he&rsquo;d always wanted to make, one evening at a time.</p>
+      <p class="hand mo-scroll">scroll for the story &darr;</p>
+    </div>
+    <figure class="compare-card">
+      <div class="compare" id="compare" style="--pos: 50%">
+        <img class="compare-final" src="../img/robot/tableau-cowboy.webp" width="1015" height="668" alt="The finished, coloured Scraphead robot in a cowboy hat with a smoking pistol" />
+        <div class="compare-sketch" aria-hidden="true"><img src="../img/making-of/sketch-tableau-cowboy.webp" width="1015" height="668" alt="" /></div>
+        <div class="compare-handle" aria-hidden="true"><span>&lsaquo;&rsaquo;</span></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Slide between the pencil sketch and the finished art" />
+      </div>
+      <figcaption class="hand">sketch &larr; drag me &rarr; finished</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<main class="story" id="story">
+  <div class="trail" aria-hidden="true"><img class="trail-robot" id="trail-robot" src="../img/robot/wear-cowboy.webp" alt="" /></div>
+
+  <!-- 1 -->
+  <section class="chapter" id="dream">
+    <span class="chapter-num" aria-hidden="true">1</span>
+    <div class="chapter-grid">
+      <div class="chapter-copy reveal">
+        <p class="hand hand-kicker">chapter one</p>
+        <h2>It started with a <span class="hl">wish</span></h2>
+        <p>I&rsquo;ve been a designer ever since I finished university, and these days I work full time as a UX designer, making apps and websites easier to use.</p>
+        <p>But there&rsquo;s one thing I&rsquo;ve wanted to do for as long as I can remember: make a proper game. Not a half-finished prototype sitting in a folder, but a real one, finished and launched on Steam.</p>
+        <p>SCRAPHEAD is that game. It&rsquo;s been built in the gaps between a full-time job and being a dad: evenings, weekends, and whatever time is left once bedtime is done.</p>
+      </div>
+      <div class="chapter-art reveal">
+        <figure class="taped small-sketch">
+          <img class="sketch" src="../img/making-of/sketch-scrapper.webp" width="640" height="640" alt="A pencil sketch of the Scrapper robot" />
+        </figure>
+        <p class="sticky">Day job: UX designer.<br />Night shift: robot wrangler.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="chapter" id="inspiration">
+    <span class="chapter-num" aria-hidden="true">2</span>
+    <div class="chapter-copy wide reveal">
+      <p class="hand hand-kicker">chapter two</p>
+      <h2>Games I <span class="hl">can&rsquo;t put down</span></h2>
+      <p>Every game is built on the games its maker loves, and SCRAPHEAD wears its inspirations proudly. Two in particular have eaten more of my evenings than I&rsquo;d like to admit.</p>
+    </div>
+    <div class="equation reveal">
+      <article class="index-card">
+        <h3>Brotato</h3>
+        <p>Frantic arena fights, a ridiculous pile of weapons, and that &ldquo;one more run&rdquo; pull.</p>
+      </article>
+      <span class="eq-op hand" aria-hidden="true">+</span>
+      <article class="index-card tilt-r">
+        <h3>Slay the Spire</h3>
+        <p>A branching map where every path is a choice and every run tells its own story.</p>
+      </article>
+      <span class="eq-op hand" aria-hidden="true">=</span>
+      <article class="index-card result">
+        <img src="../img/robot/chassis-scrapper.webp" width="640" height="640" alt="" />
+        <h3>SCRAPHEAD</h3>
+        <p>What if they had a scrappy little robot?</p>
+      </article>
+    </div>
+    <p class="chapter-after reveal">The idea was simple: take the arena chaos I love from one, the pick-your-path map I love from the other, and give it a look and a sense of humour all of its own.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="chapter" id="sketchbook">
+    <span class="chapter-num" aria-hidden="true">3</span>
+    <div class="chapter-copy wide reveal">
+      <p class="hand hand-kicker">chapter three</p>
+      <h2>From sketchbook <span class="hl">to screen</span></h2>
+      <p>The robots, the hats, the aliens and the guns are all designed by me. The rules were simple: big friendly shapes and thick outlines, so everything is easy to read even when the screen fills up with aliens. Oh, and the legs had to be short and stubby. That one was non-negotiable.</p>
+    </div>
+
+    <div class="sheet reveal">
+      <div class="sheet-row row-robots">
+        <figure><img class="sketch" src="../img/making-of/sketch-scrapper.webp" width="640" height="640" alt="Pencil sketch of the Scrapper" /><figcaption class="hand">Scrapper &mdash; where it all started</figcaption></figure>
+        <figure><img class="sketch" src="../img/making-of/sketch-hauler.webp" width="640" height="640" alt="Pencil sketch of the Hauler" /><figcaption class="hand">Hauler: cargo shell + side bins</figcaption></figure>
+        <figure><img class="sketch" src="../img/making-of/sketch-scout.webp" width="640" height="640" alt="Pencil sketch of the Scout" /><figcaption class="hand">Scout: one big lens</figcaption></figure>
+        <p class="note-arrow hand">stubby legs only! &#8601;</p>
+      </div>
+      <div class="sheet-row row-hats">
+        <p class="row-label hand">hats. obviously.</p>
+        <img class="sketch" src="../img/making-of/sketch-hat-crown.webp" alt="Sketch of a crown" />
+        <img class="sketch" src="../img/making-of/sketch-hat-wizard.webp" alt="Sketch of a wizard hat" />
+        <img class="sketch" src="../img/making-of/sketch-hat-cowboy.webp" alt="Sketch of a cowboy hat" />
+        <img class="sketch" src="../img/making-of/sketch-hat-top_hat.webp" alt="Sketch of a top hat" />
+        <img class="sketch" src="../img/making-of/sketch-hat-viking.webp" alt="Sketch of a horned helmet" />
+        <img class="sketch" src="../img/making-of/sketch-hat-hard_hat.webp" alt="Sketch of a hard hat" />
+        <img class="sketch" src="../img/making-of/sketch-hat-pirate.webp" alt="Sketch of a pirate hat" />
+        <img class="sketch" src="../img/making-of/sketch-hat-beanie.webp" alt="Sketch of a beanie" />
+      </div>
+      <div class="sheet-row row-aliens">
+        <p class="row-label hand">the Swarm</p>
+        <img class="sketch" src="../img/making-of/sketch-alien-skitterling.webp" alt="Sketch of a cone-headed spider alien" />
+        <img class="sketch" src="../img/making-of/sketch-alien-bloatmite.webp" alt="Sketch of a one-eyed alien" />
+        <img class="sketch" src="../img/making-of/sketch-alien-tank.webp" alt="Sketch of a hulking blob alien" />
+        <img class="sketch" src="../img/making-of/sketch-alien-charger.webp" alt="Sketch of a spiky alien" />
+        <img class="sketch" src="../img/making-of/sketch-alien-shooter.webp" alt="Sketch of a three-eyed alien" />
+        <img class="sketch" src="../img/making-of/sketch-alien-chorus_node.webp" alt="Sketch of a many-eyed alien" />
+      </div>
+      <div class="sheet-row row-gear">
+        <p class="row-label hand">things that go bang</p>
+        <img class="sketch" src="../img/making-of/sketch-weapon-pistol.webp" alt="Sketch of a pistol" />
+        <img class="sketch" src="../img/making-of/sketch-weapon-minigun.webp" alt="Sketch of a minigun" />
+        <img class="sketch" src="../img/making-of/sketch-weapon-flamethrower.webp" alt="Sketch of a flamethrower" />
+        <img class="sketch" src="../img/making-of/sketch-weapon-chainsaw.webp" alt="Sketch of a chainsaw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="chapter" id="design">
+    <span class="chapter-num" aria-hidden="true">4</span>
+    <div class="chapter-grid">
+      <div class="chapter-copy reveal">
+        <p class="hand hand-kicker">chapter four</p>
+        <h2>Figuring out <span class="hl">the fun</span></h2>
+        <p>Before any of it looked good, it had to feel good. The core loop came first: fight, grab the scrap, pick your path, gear up, and go again.</p>
+        <p>My day job is all about making things easy to understand, and that&rsquo;s shaped SCRAPHEAD too, from the menus to how clearly a fight reads on screen.</p>
+        <p>Then came the long bit: playing it, hating bits of it, fixing them, and playing again. Every robot, hat and shop in the game has been through that loop more times than I can count.</p>
+      </div>
+      <figure class="loop reveal" aria-label="A hand-drawn diagram of the game loop: fight the Swarm, grab the scrap, pick a path, gear up, then one more run">
+        <svg viewBox="0 0 420 420" aria-hidden="true">
+          <defs>
+            <marker id="arrowhead" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M1 1 L8 5 L1 9" fill="none" stroke="#2c3a5c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </marker>
+          </defs>
+          <g filter="url(#wobble)" fill="none" stroke="#2c3a5c" stroke-width="3" stroke-linecap="round">
+            <circle cx="210" cy="210" r="118" stroke-dasharray="2 10" stroke-width="3.5" opacity=".35" />
+            <path d="M262 92 Q330 120 340 180" marker-end="url(#arrowhead)" />
+            <path d="M332 262 Q306 322 250 338" marker-end="url(#arrowhead)" />
+            <path d="M158 336 Q96 318 78 256" marker-end="url(#arrowhead)" />
+            <path d="M86 160 Q104 102 160 84" marker-end="url(#arrowhead)" />
+          </g>
+          <g class="loop-labels">
+            <text x="210" y="70" text-anchor="middle">Fight the Swarm</text>
+            <text x="360" y="222" text-anchor="middle">Grab the</text>
+            <text x="360" y="248" text-anchor="middle">scrap</text>
+            <text x="210" y="372" text-anchor="middle">Pick a path</text>
+            <text x="58" y="222" text-anchor="middle">Gear</text>
+            <text x="58" y="248" text-anchor="middle">up</text>
+            <text class="loop-centre" x="210" y="206" text-anchor="middle">one more</text>
+            <text class="loop-centre" x="210" y="240" text-anchor="middle">run?</text>
+          </g>
+        </svg>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="chapter" id="ai">
+    <span class="chapter-num" aria-hidden="true">5</span>
+    <div class="chapter-copy wide reveal">
+      <p class="hand hand-kicker">chapter five</p>
+      <h2>Where <span class="hl">AI</span> fits in</h2>
+      <p>I want to be upfront about this: I use AI to help with the coding. Code is the part I&rsquo;m honestly not amazing at, and AI helps me turn my designs into a working game far faster than I could on my own.</p>
+      <p>Everything else is mine. The art, the characters, the concepts, the mechanics and the balancing all come from me, and every idea gets played, poked and broken by real people before it ships. AI is a tool in the toolbox. The ideas and the decisions come from a person who loves games.</p>
+    </div>
+    <div class="split reveal">
+      <div class="split-card me">
+        <h3>Made by me</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Art &amp; characters</li>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Concepts &amp; world</li>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Mechanics &amp; balancing</li>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>UI &amp; UX</li>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Bug testing with friends</li>
+        </ul>
+      </div>
+      <div class="split-card ai">
+        <h3>Helped by AI</h3>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Turning designs into code</li>
+          <li><svg aria-hidden="true"><use href="#i-tick"/></svg>Hunting down code bugs</li>
+        </ul>
+        <p class="hand">the bit I&rsquo;m not amazing at</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="chapter" id="playtest">
+    <span class="chapter-num" aria-hidden="true">6</span>
+    <div class="chapter-grid flip">
+      <div class="chapter-copy reveal">
+        <p class="hand hand-kicker">chapter six</p>
+        <h2>Playtest <span class="hl">night</span></h2>
+        <p>Most evenings end the same way: a few friends, a co-op session, and a list of everything that broke. They&rsquo;re brutally honest, and SCRAPHEAD is a much better game because of it.</p>
+        <p>Bug testing with friends is honestly one of my favourite parts. Nothing finds a bug faster than a mate trying to break your game on purpose.</p>
+      </div>
+      <div class="chapter-art reveal">
+        <figure class="taped photo">
+          <img src="../img/shots/coop-shop.webp" width="1600" height="900" loading="lazy" alt="A co-op playtest: two robots clearing a room and shopping with the merchants" />
+          <figcaption class="hand">co-op testing. P2 always finds the bug.</figcaption>
+        </figure>
+        <p class="sticky pink">Find it.<br />Laugh at it.<br />Fix it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="chapter last" id="community">
+    <span class="chapter-num" aria-hidden="true">7</span>
+    <div class="chapter-copy wide reveal">
+      <p class="hand hand-kicker">chapter seven (still being written)</p>
+      <h2>Built <span class="hl">with you</span></h2>
+      <p>Launching on Steam isn&rsquo;t the finish line, it&rsquo;s the start. I&rsquo;m committed to making SCRAPHEAD better over time, and I want to do it with the people who play it: listening to feedback, fixing what breaks, and improving the game run by run.</p>
+      <p>If you play it, tell me what you love, what you don&rsquo;t, and what broke. I&rsquo;ll be listening.</p>
+      <div class="mo-cta">
+        <a class="btn btn-gold btn-lg" href="../#wishlist"><svg aria-hidden="true"><use href="#i-steam"/></svg><span>Wishlist on Steam</span></a>
+        <a class="btn btn-lg" href="mailto:hello@mangosphere.uk?subject=SCRAPHEAD%20feedback">Send feedback</a>
+      </div>
+      <p class="signoff hand">Thanks for reading. See you in the Scrapyard.<br /><span>&mdash; the dad behind Mangosphere</span></p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <a class="foot-studio" href="../../../"><img src="../../../img/mango.svg" alt="" width="40" height="40" /><span>SCRAPHEAD is a <b>Mangosphere</b> game</span></a>
+    <a class="foot-link" href="../">Back to the game &rarr;</a>
+    <p class="foot-small">&copy; <span class="js-year">2026</span> Mangosphere.</p>
+  </div>
+</footer>
+
+<script src="making-of.js"></script>
+</body>
+</html>

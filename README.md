@@ -53,3 +53,10 @@ card for it in the **Games** section of `index.html` (there's a comment there).
 SCRAPHEAD art is rendered straight from the game's own drawing code (robots,
 hats, weapons, trinkets, aliens) or cropped from in-game captures. Fonts come
 from Google Fonts (Lilita One, Balsamiq Sans, Fredoka, DM Sans; all OFL).
+
+## Making-of page
+
+`games/scraphead/making-of/` tells the story of how SCRAPHEAD was made. The
+"sketches" in `games/scraphead/img/making-of/` are pencil-style outlines generated
+from the finished game art. Swap in scans of real sketchbook pages any time: keep
+the same file names, or update the `src` paths in the page.
