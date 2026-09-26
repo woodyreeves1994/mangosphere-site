@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SCRAPHEAD · a Mangosphere game</title>
+  <meta name="description" content="SCRAPHEAD is a roguelike looter-shooter. Build a scrap robot, blast the alien Swarm, loot 30 weapons and 47 trinkets, topple five bosses and save the planet. Coming to Steam." />
+  <meta name="theme-color" content="#1d2419" />
+  <meta property="og:title" content="SCRAPHEAD · a Mangosphere game" />
+  <meta property="og:description" content="Kill aliens. Grab loot. Save the planet from the Swarm. A roguelike looter-shooter coming to Steam." />
+  <meta property="og:image" content="https://mangosphere.uk/games/scraphead/img/robot/tableau-cowboy.webp" />
+  <meta property="og:url" content="https://mangosphere.uk/games/scraphead/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://mangosphere.uk/games/scraphead/" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Fredoka:wght@700&family=Lilita+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="scraphead.css" />
+</head>
+<body>
+
+<!-- Shared SVG: the hand-drawn wobble filter, route icons and small UI glyphs. -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="7" />
+      <feDisplacementMap in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+    <!-- Route icons redrawn from the game's own map key. -->
+    <symbol id="i-battle" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M12 19 L9 7 L22 15 Q32 9 42 15 L55 7 L52 19 Q60 37 48 49 L39 55 L25 55 L16 49 Q4 37 12 19 Z M18 28 L28 32 L24 38 L18 36 Z M46 28 L36 32 L40 38 L46 36 Z M28 44 L32 39 L36 44 Z"/></symbol>
+    <symbol id="i-unknown" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M32 5 C16 5 8 16 8 32 C8 48 18 58 32 58 C48 58 57 46 57 31 C57 14 46 5 32 5 Z M22 18 Q32 10 42 18 Q50 28 37 35 L37 39 L28 39 L28 32 Q42 24 33 21 Q29 19 25 23 Z M28 44 L37 44 L37 51 L28 51 Z"/></symbol>
+    <symbol id="i-scrapyard" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M10 18 L18 8 L46 8 L54 18 L56 49 L50 55 L14 55 L8 49 Z M15 20 L49 20 L43 14 L21 14 Z M15 29 L15 46 L49 46 L49 29 L37 29 L37 37 L27 37 L27 29 Z"/></symbol>
+    <symbol id="i-elite" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M12 23 Q1 15 8 3 L15 6 L13 16 L23 18 Q32 12 41 18 L51 16 L49 6 L56 3 Q63 15 52 23 L53 39 L44 51 L36 54 L32 49 L28 54 L20 51 L11 39 Z M17 29 L28 33 L25 39 L18 37 Z M47 29 L36 33 L39 39 L46 37 Z"/></symbol>
+    <symbol id="i-bounty" viewBox="0 0 96 96"><g fill="currentColor" stroke="currentColor" stroke-width="6" stroke-linejoin="round"><path d="M25 35 29 12 45 19 63 11 72 35Z"/><path d="M9 39Q47 54 87 39L82 50Q48 66 14 50Z"/></g><path fill="currentColor" fill-rule="evenodd" d="M24 59Q48 69 72 59L66 82 48 91 30 82Z M32 67 44 71 42 77 32 73Z M54 71 64 67 64 73 56 77Z"/></symbol>
+    <symbol id="i-boss" viewBox="0 0 64 64"><path fill="currentColor" fill-rule="evenodd" d="M10 25 L5 5 L23 17 L32 2 L41 17 L59 5 L54 25 Z M12 30 L52 30 L49 47 L40 57 L24 57 L15 47 Z M20 35 L29 38 L25 43 L20 42 Z M44 35 L35 38 L39 43 L44 42 Z"/></symbol>
+    <symbol id="i-coin" viewBox="0 0 40 40"><circle cx="20" cy="21" r="15" fill="#141414"/><circle cx="20" cy="19" r="15" fill="#141414"/><circle cx="20" cy="19" r="11.5" fill="#f2c64a"/><path d="M13 15 Q20 9 27 15" stroke="#fde9a0" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="20" cy="20" r="4.5" fill="#c9962c"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 13 L9.5 18 L20 5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-steam" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2a14 14 0 0 0-13.94 12.8l7.5 3.1a4 4 0 0 1 2.24-.68h.2l3.34-4.84v-.07a5.28 5.28 0 1 1 5.28 5.28h-.12l-4.77 3.4v.18a3.96 3.96 0 0 1-7.85.76L2.5 19.9A14 14 0 1 0 16 2Zm-5.2 21.24-1.72-.71a2.97 2.97 0 1 0 1.6-4.07l1.78.74a2.19 2.19 0 1 1-1.66 4.04Zm13.35-10.8a3.52 3.52 0 1 0-3.52 3.52 3.52 3.52 0 0 0 3.52-3.52Zm-6.16 0a2.65 2.65 0 1 1 2.64 2.65 2.64 2.64 0 0 1-2.64-2.65Z"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#swarm">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a class="nav-back" href="../../" aria-label="Back to Mangosphere">
+    <img src="../../img/mango.svg" alt="" width="26" height="26" />
+    <span>Mangosphere</span>
+  </a>
+  <a class="nav-logo" href="#top">SCRAPHEAD</a>
+  <nav class="nav-links" aria-label="Page sections">
+    <a href="#run">The run</a>
+    <a href="#chassis">Chassis</a>
+    <a href="#loot">Loot</a>
+    <a href="#bosses">Bosses</a>
+    <a href="#hats">Hats</a>
+  </nav>
+  <div class="nav-right">
+    <div class="scrap-hud" title="Scrap collected. Click the aliens." aria-live="polite">
+      <svg aria-hidden="true"><use href="#i-coin"/></svg><span id="scrap">0</span>
+    </div>
+    <a class="btn btn-gold btn-sm js-steam" href="#wishlist"><svg aria-hidden="true"><use href="#i-steam"/></svg><span>Wishlist</span></a>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-tracks" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">A roguelike looter-shooter</p>
+      <h1 class="logo-title" aria-label="SCRAPHEAD">
+        <span>S</span><span>C</span><span>R</span><span>A</span><span>P</span><span>H</span><span>E</span><span>A</span><span>D</span>
+      </h1>
+      <p class="by">a Mangosphere game</p>
+      <p class="hero-tag">Kill aliens. Grab loot.<br />Save the planet from <em>the Swarm.</em></p>
+      <p class="hero-sub">You are one small robot made of spare parts, with a pistol and absolutely no plan. The Swarm has landed, and it brought friends.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold btn-lg js-steam" href="#wishlist"><svg aria-hidden="true"><use href="#i-steam"/></svg><span>Wishlist on Steam</span></a>
+        <a class="btn btn-lg" href="#run">How a run works</a>
+      </div>
+      <ul class="chips" aria-label="Game facts">
+        <li>Solo or co-op</li>
+        <li>PC &middot; Steam</li>
+        <li>Coming soon</li>
+      </ul>
+    </div>
+    <div class="hero-art">
+      <img class="hero-robot" src="img/robot/tableau-cowboy.webp" width="1015" height="668" alt="The Scraphead robot in a cowboy hat, holding a smoking pistol over three defeated aliens" />
+      <button class="alien alien-hero-a" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-shooter.webp" alt="" /></button>
+      <button class="alien alien-hero-b" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-skitterling.webp" alt="" /></button>
+      <span class="nut n1" aria-hidden="true"></span><span class="nut n2" aria-hidden="true"></span><span class="nut n3" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div class="rock-edge" aria-hidden="true"></div>
+</section>
+
+<!-- ============ THE PITCH ============ -->
+<section class="swarm" id="swarm">
+  <button class="alien peek-swarm" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-bloatmite.webp" alt="" loading="lazy" /></button>
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">Wave incoming</p>
+      <h2 class="title">The Swarm has landed.</h2>
+      <p class="lede">Every run is a fresh fight across an alien-infested junkyard. Fight, loot, upgrade, repeat. See how far a pile of scrap with legs can get.</p>
+    </header>
+
+    <div class="pillars">
+      <article class="pillar ink reveal">
+        <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-battle"/></svg></div>
+        <h3>Blast the Swarm</h3>
+        <p>Survive 30-second waves of skittering, spitting, exploding aliens. Your guns fire on their own. You aim, you dodge, you panic.</p>
+      </article>
+      <article class="pillar ink reveal">
+        <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-scrapyard"/></svg></div>
+        <h3>Loot everything</h3>
+        <p>Hoover up scrap, shop at the Scrapyard, and merge matching weapons into higher ranks. Stack trinkets until the numbers get silly.</p>
+      </article>
+      <article class="pillar ink reveal">
+        <div class="pillar-icon"><svg aria-hidden="true"><use href="#i-boss"/></svg></div>
+        <h3>Topple the big ones</h3>
+        <p>Elites, robot bounty hunters and five towering bosses stand between you and a saved planet. They do not want to be toppled.</p>
+      </article>
+    </div>
+
+    <figure class="screen reveal">
+      <div class="screen-frame">
+        <img src="img/shots/horde.webp" width="1600" height="900" loading="lazy" alt="Gameplay: a Hauler robot bristling with guns, surrounded by a massive horde of green aliens" />
+      </div>
+      <figcaption>Wave 1. It only gets worse. That's the fun part.</figcaption>
+    </figure>
+
+    <ul class="counters" aria-label="What's in the box">
+      <li class="reveal"><b data-count="3">3</b><span>chassis</span></li>
+      <li class="reveal"><b data-count="30">30</b><span>weapons</span></li>
+      <li class="reveal"><b data-count="47">47</b><span>trinkets</span></li>
+      <li class="reveal"><b data-count="5">5</b><span>bosses</span></li>
+      <li class="reveal"><b data-count="4">4</b><span>bounty hunters</span></li>
+      <li class="reveal"><b data-count="8">8</b><span>very important hats</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THE RUN (route map) ============ -->
+<section class="run" id="run">
+  <div class="wrap">
+    <div class="map ink reveal">
+      <header class="map-head">
+        <p class="map-zone">Zone 1</p>
+        <h2 class="map-title">Pick your path</h2>
+        <p class="map-sub">Every zone is a branching route map. Choose your fights, dodge the ones you can't win (yet), and meet the boss at the end.</p>
+      </header>
+
+      <ol class="route" id="route">
+        <li class="node" data-step="0">
+          <button type="button" class="node-btn" aria-pressed="true"><svg aria-hidden="true"><use href="#i-battle"/></svg></button>
+          <h3>Battle</h3>
+          <p>Survive the wave. Scoop up scrap and XP.</p>
+        </li>
+        <li class="node" data-step="1">
+          <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-unknown"/></svg></button>
+          <h3>Unknown</h3>
+          <p>Could be a chest. Could be a curse. Spin the wheel.</p>
+        </li>
+        <li class="node" data-step="2">
+          <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-scrapyard"/></svg></button>
+          <h3>Scrapyard</h3>
+          <p>Buy, sell and merge guns at the merchant.</p>
+        </li>
+        <li class="node" data-step="3">
+          <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-elite"/></svg></button>
+          <h3>Elite</h3>
+          <p>A much bigger alien with a much better reward.</p>
+        </li>
+        <li class="node" data-step="4">
+          <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-bounty"/></svg></button>
+          <h3>Bounty Hunter</h3>
+          <p>A robot gunslinger wants your head. Win it, keep their gun.</p>
+        </li>
+        <li class="node" data-step="5">
+          <button type="button" class="node-btn" aria-pressed="false"><svg aria-hidden="true"><use href="#i-boss"/></svg></button>
+          <h3>Boss</h3>
+          <p>End the zone. Or it ends you.</p>
+        </li>
+      </ol>
+      <img class="route-robot" id="route-robot" src="img/robot/wear-cowboy.webp" alt="" aria-hidden="true" />
+
+      <div class="map-shots">
+        <img src="img/shots/route-map.webp" width="1600" height="900" loading="lazy" alt="The Zone 1 Scrapyard route map, with the robot about to enter a battle" />
+        <img src="img/shots/scrapyard.webp" width="1600" height="900" loading="lazy" alt="The Scrapyard shop, a round dirt clearing with weapons for sale around a friendly merchant robot" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHASSIS ============ -->
+<section class="chassis" id="chassis">
+  <button class="alien peek-chassis" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-tank.webp" alt="" loading="lazy" /></button>
+  <div class="wrap">
+    <header class="sec-head center reveal">
+      <p class="kicker">Start a run</p>
+      <h2 class="title">Pick a chassis</h2>
+      <p class="lede">Each one is a trade. None of them is the easy one.</p>
+    </header>
+
+    <div class="chassis-row" role="radiogroup" aria-label="Chassis">
+      <button class="chassis-card is-picked reveal" data-tone="scrapper" role="radio" aria-checked="true" type="button">
+        <img class="chassis-art" src="img/robot/chassis-scrapper.webp" width="640" height="640" alt="" />
+        <span class="chassis-name">Scrapper</span>
+        <span class="chassis-tag">Good at everything, best at nothing</span>
+        <span class="stats">
+          <span><i>Health</i><b>100</b></span>
+          <span><i>Speed</i><b>470</b></span>
+          <span><i>Gun slots</i><b>6</b></span>
+          <span><i>Dodge</i><b>5.0s</b></span>
+        </span>
+        <span class="starter"><img src="img/weapons/weapon-pistol.webp" alt="" /><span>Starts with a <b>Bolt Pistol</b></span></span>
+      </button>
+
+      <button class="chassis-card reveal" data-tone="hauler" role="radio" aria-checked="false" type="button">
+        <img class="chassis-art" src="img/robot/chassis-hauler.webp" width="640" height="640" alt="" />
+        <span class="chassis-name">Hauler</span>
+        <span class="chassis-tag">Two extra gun slots. Speed sold separately.</span>
+        <span class="stats">
+          <span><i>Health</i><b class="up">130</b></span>
+          <span><i>Speed</i><b class="down">395</b></span>
+          <span><i>Gun slots</i><b class="up">8</b></span>
+          <span><i>Damage</i><b class="down">&minus;15%</b></span>
+          <span><i>Shields</i><b class="up">1</b></span>
+          <span><i>Dodge</i><b class="down">6.0s</b></span>
+        </span>
+        <span class="starter"><img src="img/weapons/weapon-shotgun.webp" alt="" /><span>Starts with a <b>Scrap Shotgun</b></span></span>
+      </button>
+
+      <button class="chassis-card reveal" data-tone="scout" role="radio" aria-checked="false" type="button">
+        <img class="chassis-art" src="img/robot/chassis-filament.webp" width="640" height="640" alt="" />
+        <span class="chassis-name">Scout</span>
+        <span class="chassis-tag">Hits like nothing else, dies like nothing else</span>
+        <span class="stats">
+          <span><i>Health</i><b class="down">45</b></span>
+          <span><i>Speed</i><b class="up">585</b></span>
+          <span><i>Gun slots</i><b class="down">3</b></span>
+          <span><i>Damage</i><b class="up">+45%</b></span>
+          <span><i>Dodge</i><b class="up">3.6s</b></span>
+        </span>
+        <span class="starter"><img src="img/weapons/weapon-knife.webp" alt="" /><span>Starts with a <b>Gutting Knife</b></span></span>
+      </button>
+    </div>
+    <p class="note reveal">Spend banked skill points in the Workshop between runs to upgrade every chassis.</p>
+  </div>
+</section>
+
+<!-- ============ LOOT ============ -->
+<section class="loot" id="loot">
+  <button class="alien peek-loot" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-chorus_node.webp" alt="" loading="lazy" /></button>
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">The Scrapyard is open</p>
+      <h2 class="title">Loot. So much loot.</h2>
+      <p class="lede">From a Slugger Bat to a Gravity Lance, from Duct Tape to a Scrap Terrier. Find two of the same gun and merge them into something meaner.</p>
+    </header>
+  </div>
+
+  <div class="marquee" aria-label="Some of the weapons">
+    <div class="marquee-track" id="weapons-track"></div>
+  </div>
+  <div class="marquee reverse" aria-label="Some of the trinkets">
+    <div class="marquee-track" id="trinkets-track"></div>
+  </div>
+
+  <div class="wrap">
+    <div class="merge ink reveal" aria-label="Merging: two rank one Miniguns make a rank two Minigun">
+      <div class="merge-card"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="1"></em></div>
+      <span class="merge-op">+</span>
+      <div class="merge-card"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="1"></em></div>
+      <span class="merge-op">=</span>
+      <div class="merge-card is-hot"><img src="img/weapons/weapon-minigun.webp" alt="" /><span>Minigun</span><em class="pips" data-rank="2"></em></div>
+      <p class="merge-copy"><b>Merge it.</b> Matching weapons combine into a higher rank. Bigger numbers. Louder noises.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOSSES ============ -->
+<section class="bosses" id="bosses">
+  <div class="rock-edge top" aria-hidden="true"></div>
+  <div class="wrap">
+    <header class="sec-head center reveal">
+      <p class="kicker">Warning: large</p>
+      <h2 class="title">Five bosses. Zero chill.</h2>
+      <p class="lede">(Except Chillspine. Chillspine is extremely chill. Please do not touch Chillspine.)</p>
+    </header>
+
+    <div class="boss-grid">
+      <article class="boss reveal" style="--boss-bg:#472823; --boss-ink:#b8dc6c">
+        <img src="img/bosses/viper-lord.webp" width="800" height="650" loading="lazy" alt="Viper Lord, a huge green snake with a tiny masked alien rider on its back" />
+        <h3 class="boss-name">Viper Lord</h3>
+        <p>A giant snake, a tiny rider and a lot of poor decisions coming your way.</p>
+      </article>
+      <article class="boss reveal" style="--boss-bg:#463c32; --boss-ink:#eba65c">
+        <img src="img/bosses/oxide-baron.webp" width="800" height="650" loading="lazy" alt="Oxide Baron, a one-eyed brass and tentacle machine with two cannons" />
+        <h3 class="boss-name">Oxide Baron</h3>
+        <p>Cannon barrages, a magnetic pull and a ring of mines. One very large eye on you.</p>
+      </article>
+      <article class="boss reveal" style="--boss-bg:#264652; --boss-ink:#a3ecf8">
+        <img src="img/bosses/chillspine.webp" width="800" height="650" loading="lazy" alt="Chillspine, an armoured crawler covered in huge ice crystals" />
+        <h3 class="boss-name">Chillspine</h3>
+        <p>Armoured, frosty and absolutely covered in pointy bits.</p>
+      </article>
+      <article class="boss reveal" style="--boss-bg:#36432a; --boss-ink:#aed96a">
+        <img src="img/bosses/goo-king.webp" width="800" height="650" loading="lazy" alt="Goo King, a many-eyed green blob with a huge toothy mouth and purple tentacles" />
+        <h3 class="boss-name">Goo King</h3>
+        <p>Many eyes. Many teeth. Mostly goo. Long may he wobble.</p>
+      </article>
+      <article class="boss reveal" style="--boss-bg:#452c29; --boss-ink:#ffb84d">
+        <img src="img/bosses/slagheart.webp" width="800" height="650" loading="lazy" alt="Slagheart, a walking furnace mech with a small goblin pilot sitting on top" />
+        <h3 class="boss-name">Slagheart</h3>
+        <p>A walking furnace with a goblin at the wheel. Smash the furnace, then deal with the pilot.</p>
+      </article>
+      <article class="boss boss-more reveal">
+        <div class="boss-more-inner">
+          <svg aria-hidden="true"><use href="#i-boss"/></svg>
+          <h3>Practice makes perfect</h3>
+          <p>Rematch bosses from the Codex and practise their attacks until you stop flinching.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOUNTY HUNTERS ============ -->
+<section class="bounties" id="bounties">
+  <button class="alien peek-bounty" type="button" aria-label="Zap an alien"><img src="img/aliens/alien-charger.webp" alt="" loading="lazy" /></button>
+  <div class="wrap">
+    <header class="sec-head center reveal">
+      <p class="kicker">Keep your head down</p>
+      <h2 class="title">Wanted: <span class="you">you</span>.</h2>
+      <p class="lede">Robot gunslingers roam the route with a price on your head. Beat one in a duel and claim their signature weapon.</p>
+    </header>
+
+    <div class="posters">
+      <article class="poster reveal">
+        <p class="poster-head">Wanted</p>
+        <img class="poster-photo" src="img/hunters/brass-jack.webp" width="340" height="330" loading="lazy" alt="Brass Jack, a robot gunslinger in a brown cowboy hat with two revolvers" />
+        <h3>Brass Jack</h3>
+        <p class="poster-loot"><img src="img/weapons/weapon-smith_western.webp" alt="" /><span><b>Smith &amp; Western</b>Three heavy shots. One very persuasive argument.</span></p>
+      </article>
+      <article class="poster reveal">
+        <p class="poster-head">Wanted</p>
+        <img class="poster-photo" src="img/hunters/rattlescale.webp" width="340" height="330" loading="lazy" alt="Rattlescale, a lizard outlaw with a lasso and a glowing venom gun" />
+        <h3>Rattlescale</h3>
+        <p class="poster-loot"><img src="img/weapons/weapon-venom_revolver.webp" alt="" /><span><b>Sidewinder</b>Five seconds of venom in every shot.</span></p>
+      </article>
+      <article class="poster reveal">
+        <p class="poster-head">Wanted</p>
+        <img class="poster-photo" src="img/hunters/bug-eyes.webp" width="340" height="330" loading="lazy" alt="Bug Eyes, an insect outlaw with a claw arm, a shotgun and two little drones" />
+        <h3>Bug Eyes</h3>
+        <p class="poster-loot"><img src="img/weapons/weapon-bug_eyes_shotgun.webp" alt="" /><span><b>Bug Eyes&rsquo; Buckshot</b>A short barrel. A heavy wall of buckshot.</span></p>
+      </article>
+      <article class="poster reveal">
+        <p class="poster-head">Wanted</p>
+        <img class="poster-photo" src="img/hunters/griller.webp" width="340" height="330" loading="lazy" alt="Griller, a gas-masked robot with a huge flamethrower" />
+        <h3>Griller</h3>
+        <p class="poster-loot"><img src="img/weapons/weapon-griller_flamethrower.webp" alt="" /><span><b>Griller&rsquo;s Furnace</b>An overfed furnace. Longer flames and a fiercer burn.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HAT LOCKER ============ -->
+<section class="hats" id="hats">
+  <div class="wrap hats-grid">
+    <div class="hat-stage reveal">
+      <div class="hat-spot" aria-hidden="true"></div>
+      <img class="hat-robot" id="hat-robot" src="img/robot/wear-cowboy.webp" width="600" height="780" alt="The Scraphead robot wearing the Dust Rider hat" />
+    </div>
+    <div class="locker ink reveal">
+      <h2 class="locker-title">Hat Locker <span class="nowrap">&middot; 8 / 8</span></h2>
+      <p class="locker-sub">Unlock hats at the merchant. Cosmetic only. Absolutely essential.</p>
+      <div class="hat-grid" id="hat-grid" role="radiogroup" aria-label="Hats">
+        <button type="button" role="radio" aria-checked="false" data-hat="crown"><img src="img/hats/hat-crown.webp" alt="" /><span>Scrap King</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="wizard"><img src="img/hats/hat-wizard.webp" alt="" /><span>Star Wanderer</span></button>
+        <button type="button" role="radio" aria-checked="true" data-hat="cowboy"><img src="img/hats/hat-cowboy.webp" alt="" /><span>Dust Rider</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="top_hat"><img src="img/hats/hat-top_hat.webp" alt="" /><span>The Gentleman</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="viking"><img src="img/hats/hat-viking.webp" alt="" /><span>Iron Raider</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="hard_hat"><img src="img/hats/hat-hard_hat.webp" alt="" /><span>Site Supervisor</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="pirate"><img src="img/hats/hat-pirate.webp" alt="" /><span>Void Captain</span></button>
+        <button type="button" role="radio" aria-checked="false" data-hat="beanie"><img src="img/hats/hat-beanie.webp" alt="" /><span>Dockhand</span></button>
+      </div>
+      <button type="button" class="btn btn-block" id="hat-off">Remove hat</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CO-OP ============ -->
+<section class="coop">
+  <div class="wrap coop-grid">
+    <div class="coop-copy reveal">
+      <p class="kicker">Two heads are better than one</p>
+      <h2 class="title">Bring a friend.</h2>
+      <p class="lede">Team up online with a Steam friend for the full campaign. Share the route, share the loot (mostly), and pick each other back up when things go sideways.</p>
+    </div>
+    <div class="coop-art reveal" aria-hidden="true">
+      <img src="img/robot/chassis-hauler.webp" alt="" class="coop-a" />
+      <img src="img/robot/chassis-filament.webp" alt="" class="coop-b" />
+      <span class="coop-heart">+</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">Snapshots from the junkyard</p>
+      <h2 class="title">Screenshots</h2>
+    </header>
+    <div class="shots" id="shots">
+      <button type="button" class="shot big reveal"><img src="img/shots/wave-fight.webp" loading="lazy" alt="Wave 2: the cowboy-hatted robot fighting cone-headed aliens in a dirt arena" /></button>
+      <button type="button" class="shot reveal"><img src="img/shots/zone-coolant.webp" loading="lazy" alt="A wave in the teal coolant zone, fighting spiders and hulking green brutes" /></button>
+      <button type="button" class="shot reveal"><img src="img/shots/bounty-duel.webp" loading="lazy" alt="A bounty hunter duel" /></button>
+      <button type="button" class="shot reveal"><img src="img/shots/baron-fight.webp" loading="lazy" alt="Fighting the Oxide Baron boss" /></button>
+      <button type="button" class="shot reveal"><img src="img/shots/flames.webp" loading="lazy" alt="Flamethrower chaos in the arena" /></button>
+      <button type="button" class="shot reveal"><img src="img/shots/luck-wheel.webp" loading="lazy" alt="The luck wheel from an Unknown node, landed on a good break" /></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WISHLIST ============ -->
+<section class="wishlist" id="wishlist">
+  <div class="wrap">
+    <div class="cta ink reveal">
+      <img class="cta-art" src="img/robot/tableau-wizard.webp" width="1015" height="747" loading="lazy" alt="The Scraphead robot in a purple wizard hat with a smoking pistol" />
+      <div class="cta-copy">
+        <h2 class="logo-title small" aria-label="SCRAPHEAD"><span>SCRAPHEAD</span></h2>
+        <p class="cta-line">The Swarm isn&rsquo;t going to shoot itself.</p>
+        <p>Wishlist on Steam to hear the moment it lands. It genuinely helps a small studio a lot.</p>
+        <a class="btn btn-gold btn-lg js-steam" href="#wishlist"><svg aria-hidden="true"><use href="#i-steam"/></svg><span>Wishlist on Steam</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-inner">
+    <a class="foot-studio" href="../../"><img src="../../img/mango.svg" alt="" width="40" height="40" /><span>SCRAPHEAD is a <b>Mangosphere</b> game</span></a>
+    <p class="foot-small">&copy; <span class="js-year">2026</span> Mangosphere. All aliens were harmed in the making of this game.</p>
+  </div>
+</footer>
+
+<!-- Lightbox for screenshots -->
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot">
+  <img alt="" />
+  <button type="button" class="btn btn-sm lb-close" aria-label="Close">Close</button>
+</dialog>
+
+<script src="scraphead.js"></script>
+</body>
+</html>
