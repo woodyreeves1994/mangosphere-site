@@ -498,19 +498,12 @@ section { position: relative; padding: 110px 0; }
 .bounty-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
 .bounty-copy .lede + .lede { margin-top: 14px; }
 .bounty-chips { margin-top: 26px; }
-.bounty-art { position: relative; display: grid; place-items: center; min-height: 540px; }
-.gunslinger {
-  position: absolute; right: -6%; bottom: 0; z-index: 0; width: 64%; height: auto;
-  filter: drop-shadow(0 0 22px rgba(255, 179, 71, .12));
-  animation: slinger 6s ease-in-out infinite;
-}
-@keyframes slinger { 50% { transform: translateX(-10px); } }
-.slinger-eyes { animation: beast-blink 5s infinite; transform-box: fill-box; transform-origin: center; }
+.bounty-art { position: relative; display: grid; place-items: center; padding: 20px 0; }
 
 .poster {
   --tilt: -4deg;
   position: relative; isolation: isolate; z-index: 1;
-  display: block; width: min(330px, 82%); margin-right: 26%;
+  display: block; width: min(330px, 82%); margin: 0 auto;
   padding: 32px 22px 24px; text-align: center; color: #3b2b1a;
   font: inherit; background: none; border: 0;
   transform: rotate(var(--tilt));
@@ -676,7 +669,6 @@ section { position: relative; padding: 110px 0; }
   .chassis-row { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; gap: 40px; }
   .chassis-tag { min-height: 0; }
   .bounty-grid { grid-template-columns: 1fr; }
-  .bounty-art { min-height: 500px; max-width: 560px; width: 100%; margin: 0 auto; }
   .hats-grid, .coop-grid, .story-grid { grid-template-columns: 1fr; }
   .hat-stage { max-width: 380px; margin: 0 auto; }
   .coop-art { max-width: 460px; width: 100%; margin: 0 auto; }
@@ -711,9 +703,7 @@ section { position: relative; padding: 110px 0; }
   .beast { width: 160%; top: 16%; }
   .lair-hero { width: 60%; left: 14%; bottom: -8%; }
   .boss-hud { width: 84%; }
-  .bounty-art { min-height: 440px; }
-  .poster { margin-right: 18%; width: 78%; }
-  .gunslinger { width: 70%; right: -14%; }
+  .poster { width: 82%; }
   .hat-grid { grid-template-columns: repeat(2, 1fr); }
   .merge { gap: 10px; }
   .merge-card { width: 104px; }
